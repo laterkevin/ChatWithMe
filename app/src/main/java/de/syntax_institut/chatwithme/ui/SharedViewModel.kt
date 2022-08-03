@@ -1,5 +1,6 @@
 package de.syntax_institut.chatwithme.ui
 
+import android.provider.ContactsContract
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -38,9 +39,11 @@ class SharedViewModel : ViewModel() {
 
     // Der aktuell ausgewählte Kontakt wird in einer verschachtelten Variable gespeichert
     // TODO
+    var currentContact = contactList[0]
 
     // Der Zustand der Draft Message wird in einer verschachtelten Variable gespeichert
     // TODO
+    var draftMessageState = DraftState.values()
 
     // Der Eingabe Text wird in einer Variablen gespeichert
     // TODO
