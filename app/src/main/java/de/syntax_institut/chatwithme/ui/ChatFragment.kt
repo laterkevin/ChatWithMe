@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import de.syntax_institut.chatwithme.adapter.MessageAdapter
 import de.syntax_institut.chatwithme.databinding.FragmentChatBinding
@@ -67,6 +68,9 @@ class ChatFragment : Fragment() {
 
         // Der BtnBack bekommt einen Click Listener
         // TODO
+        binding.btnBack.setOnClickListener {
+            binding.btnBack.findNavController().navigateUp()
+        }
     }
 
     /**

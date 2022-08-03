@@ -6,9 +6,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import de.syntax_institut.chatwithme.R
 import de.syntax_institut.chatwithme.data.model.Contact
+import de.syntax_institut.chatwithme.ui.HomeFragment
+import de.syntax_institut.chatwithme.ui.HomeFragmentDirections
 
 /**
  * Diese Klasse organisiert mithilfe der ViewHolder Klasse das Recycling
@@ -44,15 +47,24 @@ class ContactAdapter(
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         // Der aktuelle Kontakt wird aus dem Dataset geholt
         // TODO
+        val item = dataset[position]
 
         // Das Profilbild und der Profilname werden gesetzt
         // TODO
+        holder.ivPicture.setImageResource(item.imageResId)
+        holder.tvName.text = item.name
 
         // Falls Nachrichten in der Liste des Kontakts existieren wird die neuste Nachricht angezeigt
         // TODO
+        if(item.chatHistory.size != 0) {
+        holder.tvLastMessage.text = item.chatHistory[0].toString()
+        }
 
         // Das komplette ConstraintLayout bekommt einen Click Listener, in dem zum ChatFragment navigiert wird
         // TODO
+        holder.clContact.setOnClickListener {
+            holder.itemView.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToChatFragment(position))
+        }
     }
 
     /**
