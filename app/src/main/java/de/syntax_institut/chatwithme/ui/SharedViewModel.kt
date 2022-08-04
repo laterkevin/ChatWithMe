@@ -47,7 +47,7 @@ class SharedViewModel : ViewModel() {
 
     // Der Zustand der Draft Message wird in einer verschachtelten Variable gespeichert
     // TODO
-    private var _draftMessageState = MutableLiveData<DraftState>(DraftState.DELETED)
+    private var _draftMessageState = MutableLiveData(DraftState.DELETED)
     val draftMessageState: LiveData<DraftState>
         get() = _draftMessageState
 
