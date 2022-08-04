@@ -39,11 +39,15 @@ class SharedViewModel : ViewModel() {
 
     // Der aktuell ausgewählte Kontakt wird in einer verschachtelten Variable gespeichert
     // TODO
-    var currentContact = contactList[0]
+    private lateinit var _currentContact: Contact
+    val currentContact: Contact
+        get() = _currentContact
 
     // Der Zustand der Draft Message wird in einer verschachtelten Variable gespeichert
     // TODO
-    var draftMessageState = DraftState.values()
+    private val _draftMessageState = MutableLiveData<DraftState>(DraftState.DELETED)
+        val draftMessageState: LiveData<DraftState>
+            get() = _draftMessageState
 
     // Der Eingabe Text wird in einer Variablen gespeichert
     // TODO
