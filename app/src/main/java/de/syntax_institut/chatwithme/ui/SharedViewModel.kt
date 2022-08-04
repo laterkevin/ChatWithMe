@@ -29,11 +29,11 @@ class SharedViewModel : ViewModel() {
 
     // Eine Instanz des Repository wird in einer Variablen gespeichert
     // TODO
-    var repoInstance = Repository()
+    var repository = Repository()
 
     // Die Liste aus Kontakten wird in einer verschachtelten Variable gespeichert
     // TODO
-    private val _contactList = repoInstance.contactList
+    private var _contactList = repository.contactList
         val contactList: List<Contact>
             get() = _contactList
 

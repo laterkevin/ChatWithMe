@@ -56,14 +56,15 @@ class ContactAdapter(
 
         // Falls Nachrichten in der Liste des Kontakts existieren wird die neuste Nachricht angezeigt
         // TODO
-        if(item.chatHistory.size != 0) {
-        holder.tvLastMessage.text = item.chatHistory[0].toString()
+        if (item.chatHistory.size != 0) {
+            holder.tvLastMessage.text = item.chatHistory[0].messageText
         }
 
         // Das komplette ConstraintLayout bekommt einen Click Listener, in dem zum ChatFragment navigiert wird
         // TODO
         holder.clContact.setOnClickListener {
-            holder.itemView.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToChatFragment(position))
+            holder.itemView.findNavController()
+                .navigate(HomeFragmentDirections.actionHomeFragmentToChatFragment(position))
         }
     }
 
