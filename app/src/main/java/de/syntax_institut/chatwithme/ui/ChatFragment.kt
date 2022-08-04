@@ -10,11 +10,13 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import de.syntax_institut.chatwithme.adapter.MessageAdapter
 import de.syntax_institut.chatwithme.databinding.FragmentChatBinding
+import org.w3c.dom.Text
 
 class ChatFragment : Fragment() {
 
     // Hier wird das ViewModel, in dem die Logik stattfindet, geholt
     // TODO
+    private val viewModel: SharedViewModel by activityViewModels()
 
     // Das binding für das QuizFragment wird deklariert
     private lateinit var binding: FragmentChatBinding
@@ -41,15 +43,20 @@ class ChatFragment : Fragment() {
 
         // Mit binding wird das ViewModel und der viewLifecycleOwner dem Layout zugewiesen
         // TODO
+        binding.lifecycleOwner = viewLifecycleOwner
 
         // Das übergebene Argument ("contact Index") wird in eine Variable gespeichert
         // TODO
+        val contactIndex = requireArguments().getInt("contactIndex")
 
         // Über die Funktion aus dem ViewModel wird der Chat initialisiert
         // TODO
+        viewModel.initializeChat(contactIndex)
 
         // Anhand der Informationen, die im currentContact im ViewModel gespeichert sind, wird das Profilbild und der Profilname gesetzt
         // TODO
+        binding.ivContactPicture.setImageResource(viewModel.currentContact.imageResId)
+        binding.tvContactName.text = viewModel.currentContact.name
 
         // Die Variable aus dem ViewModel, in der der TextInput gespeichert ist wird beobachtet
         // TODO
