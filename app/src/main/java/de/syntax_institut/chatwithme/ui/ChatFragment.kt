@@ -92,12 +92,10 @@ class ChatFragment : Fragment() {
         // TODO
         binding.btnSend.setOnClickListener {
             if (viewModel.inputText.value == "") {
-                Toast.makeText(context, "Bitte zuerst eine Nachricht eingeben!", Toast.LENGTH_SHORT).show()
-            }
-            try {
+                Toast.makeText(context, "Bitte zuerst eine Nachricht eingeben!", Toast.LENGTH_SHORT)
+                    .show()
+            } else {
                 viewModel.sendDraftMessage()
-            } catch (e: Exception) {
-                println("No Input Text" + e)
             }
         }
 
