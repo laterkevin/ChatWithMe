@@ -1,9 +1,11 @@
 package de.syntax_institut.chatwithme.ui
 
+import android.app.ProgressDialog.show
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
@@ -11,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import de.syntax_institut.chatwithme.adapter.MessageAdapter
 import de.syntax_institut.chatwithme.databinding.FragmentChatBinding
 import org.w3c.dom.Text
+import java.lang.Exception
 
 class ChatFragment : Fragment() {
 
@@ -88,7 +91,14 @@ class ChatFragment : Fragment() {
         // Der btnSend bekommt einen Click Listener
         // TODO
         binding.btnSend.setOnClickListener {
-            viewModel.sendDraftMessage()
+            if (viewModel.inputText.value == "") {
+                Toast.makeText(context, "Bitte zuerst eine Nachricht eingeben!", Toast.LENGTH_SHORT).show()
+            }
+            try {
+                viewModel.sendDraftMessage()
+            } catch (e: Exception) {
+                println("No Input Text" + e)
+            }
         }
 
         // Der BtnBack bekommt einen Click Listener

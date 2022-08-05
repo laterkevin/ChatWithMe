@@ -1,7 +1,9 @@
 package de.syntax_institut.chatwithme.ui
 
+import android.content.Context
 import android.os.Build.VERSION_CODES.P
 import android.provider.ContactsContract
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,6 +11,7 @@ import de.syntax_institut.chatwithme.data.Repository
 import de.syntax_institut.chatwithme.data.model.Contact
 import de.syntax_institut.chatwithme.data.model.Message
 import org.w3c.dom.Text
+import java.lang.Exception
 
 /**
  * Diese enum class repräsentiert den momentanen Zustand der Draft Message
@@ -61,6 +64,7 @@ class SharedViewModel : ViewModel() {
     fun initializeChat(contactIndex: Int) {
         // TODO
         _currentContact = contactList[contactIndex]
+        inputText.value = ""
         _draftMessageState.value = DraftState.DELETED
     }
 
@@ -70,7 +74,7 @@ class SharedViewModel : ViewModel() {
     fun closeChat() {
         // TODO
         if (draftMessageState.value == DraftState.CREATED || draftMessageState.value ==
-                DraftState.CHANGED
+            DraftState.CHANGED
         ) {
             _currentContact.chatHistory.removeAt(0)
             _draftMessageState.value = DraftState.DELETED
@@ -85,8 +89,7 @@ class SharedViewModel : ViewModel() {
         // TODO
         if (draftMessageState.value == DraftState.CREATED || draftMessageState.value ==
             DraftState.CHANGED
-        )
-         {
+        ) {
             if (text != "") {
                 _draftMessageState.value = DraftState.CHANGED
                 _currentContact.chatHistory[0].messageText = text
@@ -108,8 +111,10 @@ class SharedViewModel : ViewModel() {
      */
     fun sendDraftMessage() {
         // TODO
-        _currentContact.chatHistory[0].isDraft = false
+        currentContact.chatHistory[0].isDraft = false
         _draftMessageState.value = DraftState.SENT
         inputText.value = ""
     }
 }
+
+
