@@ -53,6 +53,14 @@ class MessageAdapter(
 
         // Die CardView bekommt einen Long Click Listener, in dem ein Share Intent erstellt wird
         // BONUS
+        holder.cvMessage.setOnClickListener {
+            val messageIntent = Intent(Intent.ACTION_SEND)
+            messageIntent.putExtra(Intent.EXTRA_TEXT, holder.tvText.text)
+            messageIntent.type = "text/plain"
+            val shareIntent = Intent.createChooser(messageIntent, null)
+            startActivity(context, shareIntent, null)
+            true
+        }
     }
 
     /**
