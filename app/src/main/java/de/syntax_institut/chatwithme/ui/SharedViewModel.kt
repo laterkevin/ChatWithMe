@@ -69,9 +69,8 @@ class SharedViewModel : ViewModel() {
      */
     fun closeChat() {
         // TODO
-        if (draftMessageState == MutableLiveData(DraftState.CREATED) || draftMessageState == MutableLiveData(
+        if (draftMessageState.value == DraftState.CREATED || draftMessageState.value ==
                 DraftState.CHANGED
-            )
         ) {
             _currentContact.chatHistory.removeAt(0)
             _draftMessageState.value = DraftState.DELETED
@@ -84,7 +83,9 @@ class SharedViewModel : ViewModel() {
      */
     fun inputTextChanged(text: String) {
         // TODO
-        if (draftMessageState.value != DraftState.DELETED)
+        if (draftMessageState.value == DraftState.CREATED || draftMessageState.value ==
+            DraftState.CHANGED
+        )
          {
             if (text != "") {
                 _draftMessageState.value = DraftState.CHANGED
